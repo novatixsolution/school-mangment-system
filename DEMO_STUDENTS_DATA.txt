@@ -1,0 +1,793 @@
+===============================================================================
+                    DEMO STUDENTS DATA - EASY COPY FORMAT
+===============================================================================
+
+Total: 43 Students | 4 Classes | 5 Sibling Groups
+Copy data directly from fields below (no labels)
+
+===============================================================================
+                          CLASS 1 - 8 STUDENTS
+===============================================================================
+
+STUDENT 1
+Ahmed Ali Khan
+15/05/2015
+Male
+3520201234567
+Ali Khan
+4210112345671
+42101-1234567-1
+Fatima Khan
+0300-1234567
+House 12, Street 5, Model Town, Lahore
+0300-1234567
+Islam
+O+
+
+---
+
+STUDENT 2
+Ayesha Malik
+22/03/2015
+Female
+3520223456789
+Hassan Malik
+4210123456789
+42101-2345678-9
+Sara Malik
+0321-2345678
+Flat 3A, Green Apartments, Gulberg, Lahore
+0321-2345678
+Islam
+A+
+
+---
+
+STUDENT 3
+Muhammad Usman
+10/08/2014
+Male
+3520234567891
+Usman Ahmed
+4210134567897
+42101-3456789-7
+Amina Ahmed
+0300-3456789
+House 45, Block C, DHA Phase 5, Lahore
+0300-3456789
+Islam
+B+
+
+---
+
+STUDENT 4 [SIBLING - Sister in Class 3]
+Zainab Hussain
+05/01/2015
+Female
+3520245678912
+Ali Hussain
+4210145678905
+42101-4567890-5
+Mariam Hussain
+0333-4567890
+House 78, Cavalry Ground, Lahore
+0333-4567890
+Islam
+O+
+
+---
+
+STUDENT 5
+Hamza Raza
+18/11/2014
+Male
+3520256789123
+Raza Ali
+4210156789013
+42101-5678901-3
+Hina Raza
+0301-5678901
+House 23, Johar Town, Lahore
+0301-5678901
+Islam
+A+
+
+---
+
+STUDENT 6
+Maryam Tariq
+30/06/2015
+Female
+3520267890134
+Tariq Mahmood
+4210167890121
+42101-6789012-1
+Sana Tariq
+0322-6789012
+House 56, Garden Town, Lahore
+0322-6789012
+Islam
+B+
+
+---
+
+STUDENT 7 [SIBLING - Sister in Class 2]
+Abdullah Rasheed
+12/04/2015
+Male
+3520278901245
+Rasheed Ahmad
+4210178901239
+42101-7890123-9
+Ayesha Rasheed
+0300-7890123
+House 34, Faisal Town, Lahore
+0300-7890123
+Islam
+O+
+
+---
+
+STUDENT 8
+Fatima Zahra
+25/09/2014
+Female
+3520289012356
+Zakariya Yousaf
+4210189012347
+42101-8901234-7
+Khadija Yousaf
+0334-8901234
+House 90, Allama Iqbal Town, Lahore
+0334-8901234
+Islam
+AB+
+
+===============================================================================
+                          CLASS 2 - 12 STUDENTS
+===============================================================================
+
+STUDENT 9
+Ali Hamza
+08/07/2013
+Male
+3520290123467
+Hamza Farooq
+4210190123455
+42101-9012345-5
+Rabia Farooq
+0302-9012345
+House 15, Shadman, Lahore
+0302-9012345
+Islam
+A+
+
+---
+
+STUDENT 10
+Hafsa Noor
+14/02/2013
+Female
+3520201234578
+Noor Ahmed
+4210101234563
+42101-0123456-3
+Zara Noor
+0323-0123456
+House 67, Wapda Town, Lahore
+0323-0123456
+Islam
+O+
+
+---
+
+STUDENT 11
+Bilal Saeed
+20/05/2013
+Male
+3520212345689
+Saeed Anwar
+4210112345091
+42101-1234509-1
+Nadia Saeed
+0300-1234509
+House 89, Township, Lahore
+0300-1234509
+Islam
+B+
+
+---
+
+STUDENT 12 [SIBLING - Brother in Class 4]
+Amna Faisal
+11/09/2013
+Female
+3520223456790
+Faisal Rauf
+4210123456109
+42101-2345610-9
+Sadia Faisal
+0321-2345610
+House 42, Bahria Town, Lahore
+0321-2345610
+Islam
+A+
+
+---
+
+STUDENT 13
+Umar Farooq
+03/12/2013
+Male
+3520234567801
+Farooq Azam
+4210134567217
+42101-3456721-7
+Asma Farooq
+0333-3456721
+House 28, Muslim Town, Lahore
+0333-3456721
+Islam
+O+
+
+---
+
+STUDENT 14
+Zara Khan
+19/03/2013
+Female
+3520245678912
+Imran Khan
+4210145678325
+42101-4567832-5
+Marium Khan
+0301-4567832
+House 51, Canal Road, Lahore
+0301-4567832
+Islam
+AB+
+
+---
+
+STUDENT 15
+Hassan Ali
+27/06/2013
+Male
+3520256789023
+Ali Raza
+4210156789433
+42101-5678943-3
+Hira Ali
+0322-5678943
+House 73, EME Society, Lahore
+0322-5678943
+Islam
+B+
+
+---
+
+STUDENT 16 [SIBLING - Sister in Class 3]
+Aisha Malik
+05/11/2013
+Female
+3520267890134
+Malik Adnan
+4210167890541
+42101-6789054-1
+Farah Malik
+0300-6789054
+House 19, Defense Raya, Lahore
+0300-6789054
+Islam
+A+
+
+---
+
+STUDENT 17
+Yasir Nawaz
+13/08/2013
+Male
+3520278901245
+Nawaz Sharif
+4210178901659
+42101-7890165-9
+Samina Nawaz
+0334-7890165
+House 36, Gulshan Ravi, Lahore
+0334-7890165
+Islam
+O+
+
+---
+
+STUDENT 18 [SIBLING - Brother in Class 1]
+Hiba Rasheed
+22/01/2014
+Female
+3520289012356
+Rasheed Ahmad
+4210178901239
+42101-7890123-9
+Ayesha Rasheed
+0300-7890123
+House 34, Faisal Town, Lahore
+0300-7890123
+Islam
+O+
+
+---
+
+STUDENT 19
+Ibrahim Siddique
+16/04/2013
+Male
+3520290123467
+Siddique Ahmed
+4210189012767
+42101-8901276-7
+Lubna Siddique
+0302-8901276
+House 62, Iqbal Town, Lahore
+0302-8901276
+Islam
+B+
+
+---
+
+STUDENT 20
+Mahnoor Iqbal
+29/10/2013
+Female
+3520201234578
+Iqbal Hussain
+4210190123875
+42101-9012387-5
+Shaista Iqbal
+0323-9012387
+House 85, Valencia Town, Lahore
+0323-9012387
+Islam
+A+
+
+===============================================================================
+                          CLASS 3 - 9 STUDENTS
+===============================================================================
+
+STUDENT 21
+Huzaifa Abbas
+07/04/2012
+Male
+3520212345689
+Abbas Ali
+4210101234983
+42101-0123498-3
+Saba Abbas
+0300-0123498
+House 11, Lake City, Lahore
+0300-0123498
+Islam
+O+
+
+---
+
+STUDENT 22
+Aliza Ahmed
+18/11/2012
+Female
+3520223456790
+Ahmed Kamal
+4210112345091
+42101-1234509-1
+Raheela Ahmed
+0321-1234509
+House 44, Askari 10, Lahore
+0321-1234509
+Islam
+A+
+
+---
+
+STUDENT 23 [SIBLING - Sister in Class 1]
+Talha Hussain
+25/08/2012
+Male
+3520234567801
+Ali Hussain
+4210145678905
+42101-4567890-5
+Mariam Hussain
+0333-4567890
+House 78, Cavalry Ground, Lahore
+0333-4567890
+Islam
+O+
+
+---
+
+STUDENT 24
+Nida Batool
+02/06/2012
+Female
+3520245678912
+Batool Hassan
+4210123456109
+42101-2345610-9
+Uzma Batool
+0333-2345610
+House 57, Paragon City, Lahore
+0333-2345610
+Islam
+B+
+
+---
+
+STUDENT 25
+Rayan Malik
+14/12/2012
+Male
+3520256789023
+Malik Asad
+4210134567217
+42101-3456721-7
+Sana Malik
+0301-3456721
+House 29, Tech Society, Lahore
+0301-3456721
+Islam
+AB+
+
+---
+
+STUDENT 26 [SIBLING - Sister in Class 2]
+Eman Malik
+21/03/2012
+Female
+3520267890134
+Malik Adnan
+4210167890541
+42101-6789054-1
+Farah Malik
+0300-6789054
+House 19, Defense Raya, Lahore
+0300-6789054
+Islam
+A+
+
+---
+
+STUDENT 27
+Saad Usman
+09/09/2012
+Male
+3520278901245
+Usman Ghani
+4210145678325
+42101-4567832-5
+Huma Usman
+0322-4567832
+House 76, State Life, Lahore
+0322-4567832
+Islam
+O+
+
+---
+
+STUDENT 28
+Kinza Arif
+28/01/2012
+Female
+3520289012356
+Arif Mahmood
+4210156789433
+42101-5678943-3
+Nazia Arif
+0300-5678943
+House 33, Eden Gardens, Lahore
+0300-5678943
+Islam
+B+
+
+---
+
+STUDENT 29
+Awais Tariq
+15/07/2012
+Male
+3520290123467
+Tariq Mehmood
+4210167890541
+42101-6789054-1
+Shazia Tariq
+0334-6789054
+House 92, Sui Gas Society, Lahore
+0334-6789054
+Islam
+A+
+
+===============================================================================
+                          CLASS 4 - 14 STUDENTS
+===============================================================================
+
+STUDENT 30
+Areeb Salman
+04/05/2011
+Male
+3520201234578
+Salman Ahmed
+4210178901659
+42101-7890165-9
+Faiza Salman
+0302-7890165
+House 14, PIA Housing, Lahore
+0302-7890165
+Islam
+O+
+
+---
+
+STUDENT 31
+Iqra Nasir
+17/09/2011
+Female
+3520212345689
+Nasir Javed
+4210189012767
+42101-8901276-7
+Tahira Nasir
+0323-8901276
+House 48, Sabzazar, Lahore
+0323-8901276
+Islam
+B+
+
+---
+
+STUDENT 32
+Waleed Khan
+23/02/2011
+Male
+3520223456790
+Khan Sahab
+4210190123875
+42101-9012387-5
+Aliya Khan
+0300-9012387
+House 61, Officers Colony, Lahore
+0300-9012387
+Islam
+A+
+
+---
+
+STUDENT 33 [SIBLING - Brother in this class]
+Dua Fatima
+11/06/2011
+Female
+3520234567801
+Fatima Aziz
+4210101234983
+42101-0123498-3
+Sumera Aziz
+0321-0123498
+House 38, LDA Avenue, Lahore
+0321-0123498
+Islam
+O+
+
+---
+
+STUDENT 34
+Zubair Akhtar
+30/11/2011
+Male
+3520245678912
+Akhtar Hussain
+4210112345091
+42101-1234509-1
+Shahnaz Akhtar
+0333-1234509
+House 25, Green Cap, Lahore
+0333-1234509
+Islam
+AB+
+
+---
+
+STUDENT 35 [SIBLING - Sister in Class 2]
+Danish Faisal
+19/04/2011
+Male
+3520256789023
+Faisal Rauf
+4210123456109
+42101-2345610-9
+Sadia Faisal
+0321-2345610
+House 42, Bahria Town, Lahore
+0321-2345610
+Islam
+A+
+
+---
+
+STUDENT 36
+Laiba Rashid
+08/08/2011
+Female
+3520267890134
+Rashid Mehmood
+4210134567217
+42101-3456721-7
+Bushra Rashid
+0301-3456721
+House 72, Canal View, Lahore
+0301-3456721
+Islam
+B+
+
+---
+
+STUDENT 37 [SIBLING - Sister in this class]
+Faizan Aziz
+26/01/2012
+Male
+3520278901245
+Fatima Aziz
+4210101234983
+42101-0123498-3
+Sumera Aziz
+0321-0123498
+House 38, LDA Avenue, Lahore
+0321-0123498
+Islam
+O+
+
+---
+
+STUDENT 38
+Nimra Zaidi
+13/10/2011
+Female
+3520289012356
+Zaidi Abbas
+4210145678325
+42101-4567832-5
+Mehwish Zaidi
+0322-4567832
+House 55, Central Park, Lahore
+0322-4567832
+Islam
+A+
+
+---
+
+STUDENT 39
+Adil Waheed
+21/03/2011
+Male
+3520290123467
+Waheed Akram
+4210156789433
+42101-5678943-3
+Saima Waheed
+0300-5678943
+House 83, DHA Phase 8, Lahore
+0300-5678943
+Islam
+O+
+
+---
+
+STUDENT 40
+Minahil Irfan
+05/12/2011
+Female
+3520201234578
+Irfan Jameel
+4210167890541
+42101-6789054-1
+Fariha Irfan
+0334-6789054
+House 17, Izmir Town, Lahore
+0334-6789054
+Islam
+B+
+
+---
+
+STUDENT 41
+Osama Yaqoob
+29/07/2011
+Male
+3520212345689
+Yaqoob Ali
+4210178901659
+42101-7890165-9
+Rukhsana Yaqoob
+0302-7890165
+House 39, Wakeel Colony, Lahore
+0302-7890165
+Islam
+AB+
+
+---
+
+STUDENT 42
+Rameen Asif
+16/05/2011
+Female
+3520223456790
+Asif Razaq
+4210189012767
+42101-8901276-7
+Nabila Asif
+0323-8901276
+House 64, Mustafa Town, Lahore
+0323-8901276
+Islam
+A+
+
+---
+
+STUDENT 43
+Shahzaib Latif
+02/09/2011
+Male
+3520234567801
+Latif Ahmed
+4210190123875
+42101-9012387-5
+Sobia Latif
+0300-9012387
+House 96, Airport Housing, Lahore
+0300-9012387
+Islam
+O+
+
+===============================================================================
+                            FIELD SEQUENCE GUIDE
+===============================================================================
+
+For each student, copy in this order:
+
+1.  Student Name
+2.  Date of Birth (DD/MM/YYYY)
+3.  Gender
+4.  Student B-Form (13 digits)
+5.  Father Name
+6.  Father CNIC (13 digits no dashes)
+7.  Father CNIC (with dashes)
+8.  Mother Name
+9.  Father Phone
+10. Full Address
+11. Emergency Contact
+12. Religion
+13. Blood Group
+
+===============================================================================
+                           SIBLING GROUPS SUMMARY
+===============================================================================
+
+1. Ali Hussain (CNIC: 42101-4567890-5)
+   - Student 4: Zainab (Class 1)
+   - Student 23: Talha (Class 3)
+
+2. Rasheed Ahmad (CNIC: 42101-7890123-9)
+   - Student 7: Abdullah (Class 1)
+   - Student 18: Hiba (Class 2)
+
+3. Faisal Rauf (CNIC: 42101-2345610-9)
+   - Student 12: Amna (Class 2)
+   - Student 35: Danish (Class 4)
+
+4. Malik Adnan (CNIC: 42101-6789054-1)
+   - Student 16: Aisha (Class 2)
+   - Student 26: Eman (Class 3)
+
+5. Fatima Aziz (CNIC: 42101-0123498-3)
+   - Student 33: Dua (Class 4)
+   - Student 37: Faizan (Class 4)
+
+===============================================================================
+                                   END
+===============================================================================
