@@ -1,14 +1,14 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+  typescript: {
+    // Isse hum TypeScript errors ko ignore kar rahe hain taake deploy na ruke
+    ignoreBuildErrors: true,
+  },
+  // Eslint wala part hata diya hai kyunke wo error de raha tha
   images: {
     unoptimized: true,
-  },
-  // Ignore lint errors during build for now to ensure deployment finishes
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
   }
 };
 
