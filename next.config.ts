@@ -1,12 +1,28 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
-  typescript: {
-    // Isse hum TypeScript errors ko ignore kar rahe hain taake deploy na ruke
-    ignoreBuildErrors: true,
+/**
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = {
+  // Disable image optimization to speed up build
+  images: {
+    unoptimized: true,
   },
-  // Eslint wala part hata diya hai kyunke wo error de raha tha
+
+  // Enable SWC minification (faster)
+  swcMinify: true,
+
+  // Reduce build strictness temporarily
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
+
+  // Optimize build performance
+  experimental: {
+    optimizeCss: false, // Disable CSS optimization temporarily
+  },
 };
 
 export default nextConfig;
