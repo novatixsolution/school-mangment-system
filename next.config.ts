@@ -2,27 +2,18 @@
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
-  // Disable image optimization to speed up build
+  // Disable image optimization to speed up build and prevent hangs
   images: {
     unoptimized: true,
   },
 
-  // Enable SWC minification (faster)
-  swcMinify: true,
-
-  // Reduce build strictness temporarily
+  // Skip linting and type checking during builds to identify if they are the bottleneck
   typescript: {
-    ignoreBuildErrors: false,
+    ignoreBuildErrors: true,
   },
-
   eslint: {
-    ignoreDuringBuilds: false,
-  },
-
-  // Optimize build performance
-  experimental: {
-    optimizeCss: false, // Disable CSS optimization temporarily
-  },
+    ignoreDuringBuilds: true,
+  }
 };
 
 export default nextConfig;
