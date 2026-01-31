@@ -1,9 +1,16 @@
-<<<<<<< HEAD
-# EduManager - School Management System
+# EduManager - School Management System v2.1
 
 A comprehensive, modern school management system built with Next.js 14, TypeScript, Tailwind CSS, and Supabase PostgreSQL.
 
-![EduManager](https://via.placeholder.com/1200x600/4F46E5/ffffff?text=EduManager+School+Management+System)
+## 🆕 Version 2.1 - Template System Integration
+
+### New Features in v2.1:
+- ✨ **Template Builder** - Visual challan template designer
+- 🎨 **Customization** - Logo, signature, colors, QR codes
+- 📄 **Auto-population** - Student data from database
+- 🔗 **Dynamic QR Codes** - Challan verification via QR scan
+- 📱 **Verification Page** - `/verify/[challanId]` for QR scanning
+- 🏫 **School Branding** - Custom branding per school
 
 ## Features
 
@@ -47,11 +54,13 @@ A comprehensive, modern school management system built with Next.js 14, TypeScri
 - Parent contact information
 - Academic history tracking
 
-### 💰 Fee Management
+### 💰 Fee Management (v2.1 Enhanced)
 - Create fee structures per class
 - Monthly/Quarterly/Annual frequencies
 - Due date configuration
-- Fee invoice (Challan) generation
+- **🆕 Template-based Challan generation**
+- **🆕 Customizable challan design**
+- **🆕 QR code verification**
 - Payment recording with partial payment support
 - Payment history
 
@@ -93,7 +102,8 @@ A comprehensive, modern school management system built with Next.js 14, TypeScri
 | Recharts | Charts and analytics |
 | Lucide React | Icons |
 | jsPDF | PDF generation |
-| JSZip | ZIP file creation |
+| html2canvas | HTML to image conversion |
+| qrcode.react | QR code generation |
 
 ## Getting Started
 
@@ -106,6 +116,7 @@ A comprehensive, modern school management system built with Next.js 14, TypeScri
 ### 1. Clone and Install
 
 ```bash
+git clone https://github.com/novatixsolution/school-mangment-system.git
 cd school-management-system
 npm install
 ```
@@ -113,9 +124,11 @@ npm install
 ### 2. Set up Supabase
 
 1. Create a new project at [supabase.com](https://supabase.com)
-2. Go to **SQL Editor** and run the migration script:
-   - Copy contents from `supabase/migrations/001_initial_schema.sql`
-   - Run in SQL Editor
+2. Go to **SQL Editor** and run the migration scripts in order:
+   - `supabase/migrations/001_initial_schema.sql`
+   - `supabase/migrations/021_enhanced_template_system.sql` (for v2.1)
+   - `supabase/migrations/022_verify_template_connection.sql`
+   - `supabase/migrations/023_fix_template_structure.sql`
 3. Create Storage buckets:
    - `photos`
    - `documents`
@@ -124,7 +137,13 @@ npm install
 
 ### 3. Configure Environment
 
-The `.env.local` file is already configured with your Supabase credentials.
+Create `.env.local`:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
 
 ### 4. Create Default Owner Account
 
@@ -160,6 +179,41 @@ Open [http://localhost:3000](http://localhost:3000)
 - **Email**: owner@school.com
 - **Password**: Owner@12345
 
+## v2.1 Template System Setup
+
+### 1. Configure School Settings
+
+Go to **Settings → School Settings** and configure:
+- School name
+- Contact details
+- Upload logo
+- Set default colors
+
+### 2. Create Challan Template
+
+1. Navigate to **Settings → Template Builder**
+2. Design your challan:
+   - Choose 2 or 3 columns
+   - Select portrait or landscape
+   - Upload logo and signature
+   - Pick primary and secondary colors
+   - Enable QR code (optional)
+3. Click **"Save as Default Template"**
+
+### 3. Generate Challans
+
+1. Go to **Students**
+2. Click **"Generate Challan"** for any student
+3. Select month and fees
+4. Click generate
+5. **Print dialog opens automatically with your template!**
+
+### 4. QR Code Verification
+
+- Scan QR code on printed challan
+- Opens: `https://yoursite.com/verify/{challan_id}`
+- Shows challan details and payment status
+
 ## Project Structure
 
 ```
@@ -167,29 +221,43 @@ src/
 ├── app/                    # Next.js App Router
 │   ├── page.tsx           # Login page
 │   ├── owner/             # Owner dashboard pages
+│   │   └── settings/
+│   │       └── template-builder/  # 🆕 Template builder
+│   ├── verify/
+│   │   └── [challanId]/   # 🆕 QR verification page
 │   ├── clerk/             # Clerk dashboard pages
 │   └── teacher/           # Teacher dashboard pages
 ├── components/
 │   ├── ui/                # Reusable UI components
+│   ├── template-builder/  # 🆕 Template builder components
 │   └── layout/            # Layout components
-├── contexts/
-│   └── AuthContext.tsx    # Authentication context
 ├── lib/
 │   ├── supabase/          # Supabase clients
+│   ├── challan-template-service.ts    # 🆕 Template database operations
+│   ├── challan-template-renderer.ts   # 🆕 Template HTML renderer
+│   ├── challan-pdf-generator.ts       # 🆕 PDF generation
+│   ├── qr-generator.ts                # 🆕 QR code generation
+│   ├── school-settings.ts             # 🆕 School settings service  
 │   └── utils.ts           # Utility functions
 └── types/                 # TypeScript interfaces
 ```
 
-## Database Schema
+## Database Schema (v2.1)
 
-The system uses these main tables:
+### New Tables in v2.1:
+- `challan_templates` - Saved challan templates
+- `school_settings` - School branding and info
+- `themes` - Color themes
+- `section_templates` - Section layout library
+
+### Existing Tables:
 - `profiles` - User profiles with roles and permissions
 - `classes` - School classes
 - `sections` - Sections within classes
 - `admissions` - Admission applications
 - `students` - Student records
 - `fee_structures` - Fee configuration
-- `fee_invoices` - Fee challans
+- `fee_challans` - Fee challans (🆕 now has `template_id`)
 - `fee_payments` - Payment records
 - `attendance` - Daily attendance
 - `exams` - Examination records
@@ -198,28 +266,40 @@ The system uses these main tables:
 - `announcements` - School announcements
 - `documents` - File metadata
 
-## Permissions System
-
-Permissions are stored as JSON and checked at the component level:
-
-```typescript
-// Example permission categories
-{
-  "admissions.create": true,
-  "admissions.approve": false,
-  "fees.collect": true,
-  "attendance.mark": true
-}
-```
-
 ## Deployment
 
 ### Vercel (Recommended)
 
-1. Push to GitHub
+1. Push to GitHub (v2.1 tag)
 2. Import in Vercel
-3. Add environment variables
+3. Add environment variables:
+   ```
+   NEXT_PUBLIC_SUPABASE_URL
+   NEXT_PUBLIC_SUPABASE_ANON_KEY
+   NEXT_PUBLIC_APP_URL
+   ```
 4. Deploy
+5. Vercel auto-deploys on every push to `main`
+
+### Railway (Database)
+
+1. Create new project
+2. Add PostgreSQL service
+3. Run migrations from Supabase SQL Editor
+
+## Version History
+
+- **v2.1** (2026-01-31) - Template System Integration
+  - Template builder UI
+  - Auto-population from database
+  - Dynamic QR codes
+  - School branding
+  - Print system integration
+
+- **v2.0** (Previous) - Challan System
+  - Fee challan generation
+  - Payment tracking
+  - Basic PDF generation
 
 ## Support
 
@@ -228,7 +308,3 @@ For issues and feature requests, please create an issue in the repository.
 ## License
 
 MIT License - feel free to use for your school!
-=======
-# Py-test-New.
-A Proof of Concept (PoC) for a School Management System using a decoupled architecture. Integrates a Next.js frontend with a Python (FastAPI) backend hosted on Railway and Supabase (PostgreSQL) for the database.
->>>>>>> 208eadc950ab7ce2f3fad4e5c8f3f29986b11a55
