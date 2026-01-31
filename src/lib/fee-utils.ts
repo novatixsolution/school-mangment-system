@@ -95,35 +95,51 @@ export async function getFeeStructure(classId: string, feeType: string = 'Monthl
 
 /**
  * Get complete fee breakdown for a student
+ * NOW USES STUDENT-LEVEL FEES (original + custom override)
  */
 export async function getStudentFeeBreakdown(studentId: string) {
     try {
         const { data: student, error } = await supabase
             .from('students')
-            .select('*, class:classes(id, class_name)')
+            .select(`
+                *,
+                class:classes(id, class_name),
+                original_tuition_fee,
+                original_admission_fee,
+                original_exam_fee,
+                original_other_fee,
+                custom_tuition_fee,
+                use_custom_fees,
+                fee_discount
+            `)
             .eq('id', studentId)
             .single()
 
         if (error || !student) throw error
 
-        const monthlyFee = calculateStudentMonthlyFee(student)
+        // Resolve tuition fee: use custom if enabled, otherwise original
+        const resolvedTuitionFee = student.use_custom_fees && student.custom_tuition_fee !== null
+            ? student.custom_tuition_fee
+            : (student.original_tuition_fee || 0)
 
-        // If no fee found from custom/class, check fee_structures
-        if (monthlyFee.baseFee === 0) {
-            const structureFee = await getFeeStructure(student.class_id, 'Monthly Fee')
-            monthlyFee.baseFee = structureFee
-            monthlyFee.finalAmount = Math.max(0, structureFee - monthlyFee.discount)
-        }
+        const discount = student.fee_discount || 0
+        const admissionFee = student.original_admission_fee || 0
+        const examFee = student.original_exam_fee || 0
+        const otherFee = student.original_other_fee || 0
 
-        const examFee = await getFeeStructure(student.class_id, 'Exam Fee')
+        const baseFee = resolvedTuitionFee
+        const monthlyFee = Math.max(0, baseFee - discount)
 
         return {
-            monthlyFee: monthlyFee.finalAmount,
+            monthlyFee: monthlyFee,
             examFee: examFee,
-            admissionFee: student.admission_fee || 0,
-            discount: monthlyFee.discount,
-            baseFee: monthlyFee.baseFee,
-            total: monthlyFee.finalAmount
+            admissionFee: admissionFee,
+            discount: discount,
+            baseFee: baseFee,
+            total: monthlyFee,
+            otherFee: otherFee,
+            resolvedTuitionFee: resolvedTuitionFee,
+            useCustomFee: student.use_custom_fees || false
         }
     } catch (error) {
         console.error('Error getting fee breakdown:', error)
@@ -133,7 +149,10 @@ export async function getStudentFeeBreakdown(studentId: string) {
             admissionFee: 0,
             discount: 0,
             baseFee: 0,
-            total: 0
+            total: 0,
+            otherFee: 0,
+            resolvedTuitionFee: 0,
+            useCustomFee: false
         }
     }
 }

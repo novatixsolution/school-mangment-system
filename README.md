@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # EduManager - School Management System
 
 A comprehensive, modern school management system built with Next.js 14, TypeScript, Tailwind CSS, and Supabase PostgreSQL.
@@ -227,3 +228,7 @@ For issues and feature requests, please create an issue in the repository.
 ## License
 
 MIT License - feel free to use for your school!
+=======
+# Py-test-New.
+A Proof of Concept (PoC) for a School Management System using a decoupled architecture. Integrates a Next.js frontend with a Python (FastAPI) backend hosted on Railway and Supabase (PostgreSQL) for the database.
+>>>>>>> 208eadc950ab7ce2f3fad4e5c8f3f29986b11a55

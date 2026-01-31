@@ -32,7 +32,15 @@ export default function EditStudentPage() {
         address: '',
         custom_fee: '',
         admission_date: '',
-        status: 'active'
+        status: 'active',
+        // New student-level fee fields
+        original_tuition_fee: 0,
+        original_admission_fee: 0,
+        original_exam_fee: 0,
+        original_other_fee: 0,
+        custom_tuition_fee: '',
+        use_custom_fees: false,
+        fee_discount: ''
     })
 
     useEffect(() => {
@@ -105,7 +113,15 @@ export default function EditStudentPage() {
                 address: data.address || '',
                 custom_fee: data.custom_fee?.toString() || '',
                 admission_date: data.admission_date || '',
-                status: data.status || 'active'
+                status: data.status || 'active',
+                // New student-level fee fields
+                original_tuition_fee: data.original_tuition_fee || 0,
+                original_admission_fee: data.original_admission_fee || 0,
+                original_exam_fee: data.original_exam_fee || 0,
+                original_other_fee: data.original_other_fee || 0,
+                custom_tuition_fee: data.custom_tuition_fee?.toString() || '',
+                use_custom_fees: data.use_custom_fees || false,
+                fee_discount: data.fee_discount?.toString() || ''
             })
         } catch (error) {
             console.error('Error fetching student:', error)
@@ -134,7 +150,11 @@ export default function EditStudentPage() {
                 address: formData.address || null,
                 custom_fee: formData.custom_fee ? parseFloat(formData.custom_fee) : null,
                 admission_date: formData.admission_date || null,
-                status: formData.status
+                status: formData.status,
+                // Update new student-level fee fields
+                custom_tuition_fee: formData.custom_tuition_fee ? parseFloat(formData.custom_tuition_fee) : null,
+                use_custom_fees: formData.use_custom_fees,
+                fee_discount: formData.fee_discount ? parseFloat(formData.fee_discount) : null
             }
 
             const { error } = await supabase
@@ -155,7 +175,11 @@ export default function EditStudentPage() {
     }
 
     const handleChange = (field: string, value: string) => {
-        setFormData(prev => ({ ...prev, [field]: value }))
+        if (field === 'use_custom_fees') {
+            setFormData(prev => ({ ...prev, [field]: value === 'true' }))
+        } else {
+            setFormData(prev => ({ ...prev, [field]: value }))
+        }
     }
 
     if (loading) {
@@ -298,8 +322,81 @@ export default function EditStudentPage() {
                                         ))}
                                     </select>
                                 </div>
+                            </div>
+
+                            {/* Fee Information Section */}
+                            <div className="mt-6 p-4 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-lg">
+                                <h3 className="text-sm font-semibold text-green-800 mb-3">Fee Information</h3>
+
+                                {/* Original Fees (Read-only) */}
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4 p-3 bg-white rounded-lg border border-green-100">
+                                    <div>
+                                        <p className="text-xs text-slate-500 mb-1">Tuition Fee</p>
+                                        <p className="text-sm font-bold text-slate-900">Rs {formData.original_tuition_fee || 0}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-slate-500 mb-1">Admission Fee</p>
+                                        <p className="text-sm font-bold text-slate-900">Rs {formData.original_admission_fee || 0}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-slate-500 mb-1">Exam Fee</p>
+                                        <p className="text-sm font-bold text-slate-900">Rs {formData.original_exam_fee || 0}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-slate-500 mb-1">Other Fees</p>
+                                        <p className="text-sm font-bold text-slate-900">Rs {formData.original_other_fee || 0}</p>
+                                    </div>
+                                </div>
+
+                                {/* Custom Fee Toggle */}
+                                <div className="flex items-center gap-3 mb-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                                    <input
+                                        type="checkbox"
+                                        id="use_custom_fees"
+                                        checked={formData.use_custom_fees}
+                                        onChange={(e) => handleChange('use_custom_fees', e.target.checked.toString())}
+                                        className="w-4 h-4 text-blue-600 rounded"
+                                    />
+                                    <label htmlFor="use_custom_fees" className="text-sm font-medium text-slate-700 cursor-pointer">
+                                        Enable Custom Tuition Fee (Override Original Fee)
+                                    </label>
+                                </div>
+
+                                {/* Custom Tuition Fee Input */}
+                                {formData.use_custom_fees && (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <Label htmlFor="custom_tuition_fee">Custom Tuition Fee *</Label>
+                                            <Input
+                                                id="custom_tuition_fee"
+                                                type="number"
+                                                step="0.01"
+                                                value={formData.custom_tuition_fee}
+                                                onChange={(e) => handleChange('custom_tuition_fee', e.target.value)}
+                                                placeholder="Enter custom tuition fee"
+                                                required={formData.use_custom_fees}
+                                                className="border-blue-300 focus:border-blue-500"
+                                            />
+                                            <p className="text-xs text-blue-600 mt-1">This will override the original tuition fee</p>
+                                        </div>
+                                        <div>
+                                            <Label htmlFor="fee_discount">Fee Discount (Optional)</Label>
+                                            <Input
+                                                id="fee_discount"
+                                                type="number"
+                                                step="0.01"
+                                                value={formData.fee_discount}
+                                                onChange={(e) => handleChange('fee_discount', e.target.value)}
+                                                placeholder="Enter discount amount"
+                                            />
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="grid grid-cols-1 gap-4">
                                 <div>
-                                    <Label htmlFor="custom_fee">Custom Monthly Fee</Label>
+                                    <Label htmlFor="custom_fee">Custom Monthly Fee (Legacy)</Label>
                                     <Input
                                         id="custom_fee"
                                         type="number"
@@ -307,7 +404,9 @@ export default function EditStudentPage() {
                                         value={formData.custom_fee}
                                         onChange={(e) => handleChange('custom_fee', e.target.value)}
                                         placeholder="Leave blank for default"
+                                        className="opacity-60"
                                     />
+                                    <p className="text-xs text-orange-600 mt-1">⚠️ Legacy field - Use custom tuition fee above instead</p>
                                 </div>
                             </div>
                         </CardContent>

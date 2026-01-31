@@ -636,7 +636,15 @@ export default function ChallansPage() {
                                                 <Button
                                                     variant="ghost"
                                                     size="sm"
-                                                    onClick={() => window.open(`/owner/challans/print/${challan.id}`, '_blank')}
+                                                    onClick={async () => {
+                                                        try {
+                                                            const { printChallan } = await import('@/lib/challan-pdf-generator')
+                                                            await printChallan(challan.id)
+                                                        } catch (error) {
+                                                            console.error('Error printing challan:', error)
+                                                            alert('Failed to print challan')
+                                                        }
+                                                    }}
                                                     className="text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
                                                 >
                                                     <Eye className="h-4 w-4 mr-1" />

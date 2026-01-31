@@ -54,37 +54,40 @@ export async function getPreviousUnpaidAmount(studentId: string, currentMonth: s
 }
 
 /**
- * Get fee structures for a student based on their class
+ * Get fee structures for a student based on their student record
+ * NOW USES STUDENT-LEVEL FEES (original + custom override)
  */
 export async function getStudentFeeStructures(
     studentId: string,
     selectedFeeTypes: string[]
 ): Promise<Record<string, number>> {
-    // Get student's class
+    // Get student's fees directly from student record
     const { data: student, error: studentError } = await supabase
         .from('students')
-        .select('class_id, fee_discount')
+        .select(`
+            id,
+            original_tuition_fee,
+            original_admission_fee,
+            original_exam_fee,
+            original_other_fee,
+            custom_tuition_fee,
+            use_custom_fees,
+            fee_discount
+        `)
         .eq('id', studentId)
         .single()
 
     if (studentError || !student) {
-        console.error('Error fetching student:', studentError)
+        console.error('Error fetching student fees:', studentError)
         return {}
     }
 
-    // Get fee structures for this class
-    const { data: feeStructures, error: feeError } = await supabase
-        .from('fee_structures')
-        .select('*')
-        .or(`class_id.eq.${student.class_id},class_id.is.null`)
-        .in('fee_type', selectedFeeTypes)
+    // Resolve tuition fee: use custom if enabled, otherwise original
+    const resolvedTuitionFee = student.use_custom_fees && student.custom_tuition_fee !== null
+        ? student.custom_tuition_fee
+        : (student.original_tuition_fee || 0)
 
-    if (feeError) {
-        console.error('Error fetching fee structures:', feeError)
-        return {}
-    }
-
-    // Calculate fees by type
+    // Initialize fees object
     const fees: Record<string, number> = {
         tuition: 0,
         exam: 0,
@@ -95,22 +98,26 @@ export async function getStudentFeeStructures(
         other: 0
     }
 
-    feeStructures?.forEach((structure: any) => {
-        const feeType = structure.fee_type || 'tuition'
+    // Map fees based on selected types
+    selectedFeeTypes.forEach(feeType => {
         if (feeType === 'tuition') {
-            fees.tuition += structure.amount
-        } else if (feeType === 'exam' || feeType === 'final_exam') {
-            fees.exam += structure.amount
+            fees.tuition = resolvedTuitionFee
         } else if (feeType === 'admission') {
-            fees.admission += structure.amount
+            fees.admission = student.original_admission_fee || 0
+        } else if (feeType === 'exam') {
+            // Mid exam - half of total exam fee
+            fees.exam = Math.floor((student.original_exam_fee || 0) / 2)
+        } else if (feeType === 'final_exam') {
+            // Final exam - other half
+            fees.exam += Math.ceil((student.original_exam_fee || 0) / 2)
         } else if (feeType === 'sports') {
-            fees.sports += structure.amount
+            fees.sports = Math.floor((student.original_other_fee || 0) * 0.3)
         } else if (feeType === 'science_lab') {
-            fees.science_lab += structure.amount
+            fees.science_lab = Math.floor((student.original_other_fee || 0) * 0.4)
         } else if (feeType === 'computer_lab') {
-            fees.computer_lab += structure.amount
+            fees.computer_lab = Math.ceil((student.original_other_fee || 0) * 0.3)
         } else {
-            fees.other += structure.amount
+            fees.other += student.original_other_fee || 0
         }
     })
 

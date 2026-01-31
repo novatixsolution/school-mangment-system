@@ -204,28 +204,37 @@ export function IndividualChallanModal({ isOpen, onClose, studentId, onGenerated
                 total
             })
 
-            const { data, error: insertError } = await supabase
+            const { data: challanData, error: insertError } = await supabase
                 .from('fee_challans')
                 .insert({
                     student_id: student.id,
                     challan_number: challanNumber,
                     month: selectedMonth,
+                    due_date: dueDate.toISOString().split('T')[0],
                     monthly_fee: monthlyFee,
-                    admission_fee: admissionFee,
                     exam_fee: examFee,
+                    admission_fee: admissionFee,
                     other_fees: otherFees,
-                    discount: discount,
+                    discount,
                     total_amount: Math.max(0, total),
                     status: 'pending',
-                    due_date: dueDate.toISOString().split('T')[0],
-                    is_first_challan: false,
-                    generated_by: user.id
+                    issue_date: new Date().toISOString().split('T')[0],
+                    created_by: user.id
                 })
                 .select()
+                .single()
 
-            if (insertError) {
-                console.error('Insert error:', insertError)
-                throw new Error(`Failed to create challan: ${insertError.message || 'Unknown error'}`)
+            if (insertError) throw insertError
+
+            // Auto-print challan using template
+            if (challanData) {
+                try {
+                    const { printChallan } = await import('@/lib/challan-pdf-generator')
+                    await printChallan(challanData.id)
+                } catch (printError) {
+                    console.error('Error printing challan:', printError)
+                    // Don't fail the whole operation if print fails
+                }
             }
 
             console.log('✅ Challan generated successfully')
@@ -287,8 +296,8 @@ export function IndividualChallanModal({ isOpen, onClose, studentId, onGenerated
 
                             {/* Fee Source Indicator */}
                             <div className={`rounded-lg p-2 flex items-center gap-2 text-sm ${feeSource === 'custom'
-                                    ? 'bg-blue-50 border border-blue-300 text-blue-700'
-                                    : 'bg-green-50 border border-green-300 text-green-700'
+                                ? 'bg-blue-50 border border-blue-300 text-blue-700'
+                                : 'bg-green-50 border border-green-300 text-green-700'
                                 }`}>
                                 <Info className="h-4 w-4 flex-shrink-0" />
                                 <span className="font-medium">

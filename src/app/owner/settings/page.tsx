@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Download, Upload, AlertTriangle, RefreshCw, Database, Shield, School, Trash2 } from 'lucide-react'
+import { Download, Upload, AlertTriangle, RefreshCw, Database, Shield, School, Trash2, Palette, FileText } from 'lucide-react'
 import { DashboardLayout } from '@/components/layout'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -151,6 +151,88 @@ export default function SettingsPage() {
                         </div>
                         <div className="mt-4">
                             <Button>Save Changes</Button>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                {/* Bank Challan Generator */}
+                <Card className="border-green-200 border-2 hover:shadow-lg transition-shadow cursor-pointer">
+                    <CardHeader>
+                        <div className="flex items-center gap-3">
+                            <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-green-100 text-green-600">
+                                <FileText className="h-6 w-6" />
+                            </div>
+                            <div className="flex-1">
+                                <CardTitle className="text-green-900">💰 Bank Challan Generator</CardTitle>
+                                <CardDescription>Create Pakistani-style 2/3 column bank challans</CardDescription>
+                            </div>
+                            <Button
+                                onClick={() => window.location.href = '/owner/settings/bank-challan'}
+                                className="bg-green-600 hover:bg-green-700"
+                            >
+                                Create Challan →
+                            </Button>
+                        </div>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                            <div className="p-3 bg-green-50 rounded-lg text-center">
+                                <div className="font-semibold text-green-900">2/3 Columns</div>
+                                <div className="text-xs text-green-600">Flexible</div>
+                            </div>
+                            <div className="p-3 bg-green-50 rounded-lg text-center">
+                                <div className="font-semibold text-green-900">Both Modes</div>
+                                <div className="text-xs text-green-600">Portrait/Landscape</div>
+                            </div>
+                            <div className="p-3 bg-green-50 rounded-lg text-center">
+                                <div className="font-semibold text-green-900">3 Templates</div>
+                                <div className="text-xs text-green-600">Pre-built</div>
+                            </div>
+                            <div className="p-3 bg-green-50 rounded-lg text-center">
+                                <div className="font-semibold text-green-900">Print Ready</div>
+                                <div className="text-xs text-green-600">One-click</div>
+                            </div>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                {/* Template Builder Link */}
+                <Card className="border-purple-200 border-2 hover:shadow-lg transition-shadow cursor-pointer">
+                    <CardHeader>
+                        <div className="flex items-center gap-3">
+                            <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-purple-100 text-purple-600">
+                                <Palette className="h-6 w-6" />
+                            </div>
+                            <div className="flex-1">
+                                <CardTitle className="text-purple-900">🎨 Challan Template Builder</CardTitle>
+                                <CardDescription>Design custom fee challan templates with drag-and-drop</CardDescription>
+                            </div>
+                            <Button
+                                onClick={() => window.location.href = '/owner/settings/template-builder'}
+                                className="bg-purple-600 hover:bg-purple-700"
+                            >
+                                Open Builder →
+                            </Button>
+                        </div>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                            <div className="p-3 bg-purple-50 rounded-lg text-center">
+                                <div className="font-semibold text-purple-900">5+ Themes</div>
+                                <div className="text-xs text-purple-600">Pre-built</div>
+                            </div>
+                            <div className="p-3 bg-purple-50 rounded-lg text-center">
+                                <div className="font-semibold text-purple-900">12 Templates</div>
+                                <div className="text-xs text-purple-600">Section library</div>
+                            </div>
+                            <div className="p-3 bg-purple-50 rounded-lg text-center">
+                                <div className="font-semibold text-purple-900">QR & Barcode</div>
+                                <div className="text-xs text-purple-600">Built-in</div>
+                            </div>
+                            <div className="p-3 bg-purple-50 rounded-lg text-center">
+                                <div className="font-semibold text-purple-900">PDF Export</div>
+                                <div className="text-xs text-purple-600">One-click</div>
+                            </div>
                         </div>
                     </CardContent>
                 </Card>

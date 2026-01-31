@@ -24,6 +24,14 @@ import { SiblingGroupsModal } from '@/components/students/SiblingGroupsModal'
 interface ExtendedStudent extends Student {
     custom_fee?: number
     attendancePercentage?: number
+    // New student-level fee columns
+    original_tuition_fee?: number
+    original_admission_fee?: number
+    original_exam_fee?: number
+    original_other_fee?: number
+    custom_tuition_fee?: number
+    use_custom_fees?: boolean
+    fee_discount?: number
 }
 
 export default function StudentsPage() {
@@ -89,10 +97,21 @@ export default function StudentsPage() {
 
             setClasses(classesData || [])
 
-            // Fetch students with custom_fee
+            // Fetch students with fee information
             let query = supabase
                 .from('students')
-                .select('*, class:classes(id, class_name), section:sections(id, section_name)')
+                .select(`
+                    *,
+                    class:classes(id, class_name),
+                    section:sections(id, section_name),
+                    original_tuition_fee,
+                    original_admission_fee,
+                    original_exam_fee,
+                    original_other_fee,
+                    custom_tuition_fee,
+                    use_custom_fees,
+                    fee_discount
+                `)
                 .eq('status', 'active')
                 .order('name')
 
@@ -141,7 +160,11 @@ export default function StudentsPage() {
 
     const openSetFeeModal = (student: ExtendedStudent) => {
         setSelectedStudent(student)
-        setCustomFee(student.custom_fee?.toString() || '')
+        // Use custom_tuition_fee if use_custom_fees is true, otherwise use original
+        const currentFee = student.use_custom_fees && student.custom_tuition_fee
+            ? student.custom_tuition_fee
+            : (student.original_tuition_fee || '')
+        setCustomFee(currentFee.toString())
         setIsSetFeeModalOpen(true)
     }
 
@@ -432,14 +455,27 @@ export default function StudentsPage() {
                                                         <span className="text-xs text-slate-600 font-medium">
                                                             {student.roll_number ? `#${student.roll_number}` : 'No Roll'}
                                                         </span>
-                                                        {student.custom_fee && (
-                                                            <div className="flex items-center gap-0.5 text-green-600 bg-white px-2 py-0.5 rounded-full shadow-sm">
-                                                                <DollarSign className="h-3 w-3" />
-                                                                <span className="text-xs font-semibold">
-                                                                    {formatCurrency(student.custom_fee)}
-                                                                </span>
-                                                            </div>
-                                                        )}
+                                                        {(() => {
+                                                            const resolvedTuitionFee = student.use_custom_fees && student.custom_tuition_fee
+                                                                ? student.custom_tuition_fee
+                                                                : (student.original_tuition_fee || 0)
+
+                                                            if (resolvedTuitionFee > 0) {
+                                                                const isCustom = student.use_custom_fees && student.custom_tuition_fee !== null
+                                                                return (
+                                                                    <div className={`flex items-center gap-0.5 ${isCustom ? 'text-blue-600 bg-blue-50 border border-blue-200' : 'text-green-600 bg-green-50 border border-green-200'} px-2 py-0.5 rounded-full shadow-sm`}>
+                                                                        <DollarSign className="h-3 w-3" />
+                                                                        <span className="text-xs font-semibold">
+                                                                            {formatCurrency(resolvedTuitionFee)}
+                                                                        </span>
+                                                                        <span className="text-[10px] ml-0.5 opacity-75">
+                                                                            {isCustom ? '(Custom)' : '(Original)'}
+                                                                        </span>
+                                                                    </div>
+                                                                )
+                                                            }
+                                                            return null
+                                                        })()}
                                                     </div>
                                                 </div>
                                             </div>
@@ -482,6 +518,48 @@ export default function StudentsPage() {
                                                     </div>
                                                 )}
                                             </div>
+
+                                            {/* Fee Breakdown */}
+                                            {(() => {
+                                                const resolvedTuitionFee = student.use_custom_fees && student.custom_tuition_fee
+                                                    ? student.custom_tuition_fee
+                                                    : (student.original_tuition_fee || 0)
+                                                const isCustom = student.use_custom_fees && student.custom_tuition_fee !== null
+
+                                                if (resolvedTuitionFee > 0 || (student.original_admission_fee || 0) > 0 || (student.original_exam_fee || 0) > 0) {
+                                                    return (
+                                                        <div className="mb-3 p-2 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-lg">
+                                                            <div className="flex items-center justify-between mb-1.5">
+                                                                <span className="text-xs font-semibold text-green-800">Fee Breakdown</span>
+                                                                {isCustom && (
+                                                                    <Badge variant="default" className="text-[10px] bg-blue-500 h-4 px-1.5">Custom</Badge>
+                                                                )}
+                                                            </div>
+                                                            <div className="space-y-1 text-xs">
+                                                                {resolvedTuitionFee > 0 && (
+                                                                    <div className="flex items-center justify-between">
+                                                                        <span className="text-slate-600">Tuition:</span>
+                                                                        <span className="font-semibold text-slate-900">{formatCurrency(resolvedTuitionFee)}</span>
+                                                                    </div>
+                                                                )}
+                                                                {(student.original_admission_fee || 0) > 0 && (
+                                                                    <div className="flex items-center justify-between">
+                                                                        <span className="text-slate-600">Admission:</span>
+                                                                        <span className="font-semibold text-slate-900">{formatCurrency(student.original_admission_fee || 0)}</span>
+                                                                    </div>
+                                                                )}
+                                                                {(student.original_exam_fee || 0) > 0 && (
+                                                                    <div className="flex items-center justify-between">
+                                                                        <span className="text-slate-600">Exam:</span>
+                                                                        <span className="font-semibold text-slate-900">{formatCurrency(student.original_exam_fee || 0)}</span>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                }
+                                                return null
+                                            })()}
 
                                             {/* Stats - Attendance */}
                                             <div className="mb-3 p-2 bg-slate-50 rounded-lg">
