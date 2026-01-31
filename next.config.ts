@@ -1,18 +1,8 @@
-/**
- * @type {import('next').NextConfig}
- */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Disable image optimization to speed up build and prevent hangs
+  // Ultra minimal config to avoid any validation errors
   images: {
     unoptimized: true,
-  },
-
-  // Skip linting and type checking during builds to identify if they are the bottleneck
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
   }
 };
 
